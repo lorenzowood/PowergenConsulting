@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Powergen group technology consulting project</title>
+<link rel="stylesheet" href="styles/main.css" type="text/css">
+<script src=javascript/util.js></script>
+<script src=javascript/issuesDef.js></script>
+<script src=javascript/issuesPage.js></script>
+<script src=javascript/peopleDef.js></script>
+<script src=javascript/issueNoteLinksDef.js></script>
+<script src=javascript/menu.js></script>
+<script>
+	var mode = getURLParameter(document.location.href, "mode");
+	if (mode == null)
+		mode = "list";
+</script>
+</head>
+<body>
+<!-- enclosing table -->
+<table width=700 border=0 cellpadding=5><tr>
+
+<!-- left-hand column (menu) -->
+<td width=100>
+<script>writeMenu(document, null)</script>
+</td><!-- /left-hand column -->
+
+<!-- right-hand column -->
+<td width=600>
+<h1>Powergen group technology consulting project</h1>
+
+<h2>Issues</h2>
+<script>
+	if (mode == "list")
+	{
+		document.write("<a href=issues.htm#mode=breakdown>Show breakdown</a>");
+		document.write("<br><br>");
+		document.write(generateIssuesList());
+	}
+	else if (mode == "breakdown")
+	{
+		document.write("<a href=issues.htm#mode=list>Show descriptions</a>");
+		document.write("<br><br>");
+		document.write(generateIssuesTable());
+	}
+	else
+		document.write("[Unknown mode: " + mode);
+</script>
+</td><!-- /right-hand column>
+
+</tr></table><!-- /enclosing table -->
+</body>
+</html>
