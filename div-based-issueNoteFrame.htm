@@ -1,0 +1,55 @@
+<head>
+	<title>Powergen group consulting technology project</title>
+	<link rel="stylesheet" href="/styles/main.css" type="text/css">
+	<script src=javascript/util.js></script>
+	<script src=javascript/peopleDef.js></script>
+	<script src=javascript/issuesDef.js></script>
+	<script src=javascript/issueNoteLinksDef.js></script>
+	<script src=javascript/issueNotePages.js></script>
+	<script src=javascript/menu.js></script>
+	<style>
+
+	div#menu {
+		width: 120px;
+		height: 100%;
+		position: fixed;
+		left: 15px;
+		top: 15px;
+		background: #ff0000;
+	}
+
+	div#issueDetail {
+		width: 150px;
+		height: 100%;
+		position: fixed;
+		left: 143px;
+		top: 0px;
+		background: #00ff00;
+	}
+
+	div#interview {
+		width: auto;
+		height: 100%;
+		position: absolute;
+		left: 300px;
+		top: 0px;
+		background: #e0e0e0;
+		padding-right: 16px;
+	}
+	</style>
+</head>
+
+<body>
+
+<div id="menu">
+</div>
+
+<div id="issueDetail">
+</div>
+
+<div id="interview">
+	bar
+</div>
+
+</body>
+<script>loadIssueNotePage(window.location.href)</script>

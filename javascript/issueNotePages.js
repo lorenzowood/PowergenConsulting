@@ -1,3 +1,20 @@
+function loadIssueNotePage(url) {
+	var urlPrefix = url.substring(0, url.indexOf("/", url.indexOf("://")+3));
+	var noteIndex = getURLParameter(new String(url), "noteindex");
+	if (noteIndex == null)
+	{
+		alert("Missing noteindex parameter");
+		return;
+	}
+	var personIndex = getPersonIndexFromID(issueNoteLinks[noteIndex][1]);
+
+	document.getElementById("menu").innerHTML = getMenuHTML("");
+	document.getElementById("issueDetail").innerHTML = getIssueNoteCommentary(url);
+	document.getElementById("interview").innerHTML = people[personIndex][8];
+
+	highlightElements(document.getElementById("interview").childNodes[0],convertCommaSeparatedNumbersToArray(issueNoteLinks[noteIndex][3]), "#ffff80");
+}
+
 function getIssueNoteFrameset(url)
 {
 	var noteIndex = getURLParameter(new String(url), "noteindex");
@@ -5,13 +22,17 @@ function getIssueNoteFrameset(url)
 	{
 		alert("Missing noteindex parameter");
 		return;
-	}	
+	}
+
+	var urlPrefix = url.substring(0, url.indexOf("/", url.indexOf("://")+3));
+	urlPrefix = urlPrefix.replace("https", "http");
+	urlPrefix = urlPrefix.replace("http://", "//");
 
 	var personIndex = getPersonIndexFromID(issueNoteLinks[noteIndex][1]);
 	var s = "<frameset onLoad='highlightElements(top.frames[2].document.childNodes[0],convertCommaSeparatedNumbersToArray(\"" + issueNoteLinks[noteIndex][3] +"\"), \"#ffff80\")' cols=120,150,* frameborder=0>";
-	s = s + "<frame src=powergenMenu.htm scrolling=no>";
-	s = s + "<frame src=\"issueNoteCommentary.htm#noteindex=" + noteIndex + "\" scrolling=no>";
-	s = s + "<frame src=\"" + people[personIndex][7]+"\">";
+	s = s + "<frame src=\"" + urlPrefix + "/powergenMenu.htm\" scrolling=\"no\">";
+	s = s + "<frame src=\"" + urlPrefix + "/issueNoteCommentary.htm#noteindex=" + noteIndex + "\" scrolling=\"no\">";
+	s = s + "<frame src=\"" + urlPrefix + "/" + people[personIndex][7]+"\">";
 	s = s + "</frameset>";
 
 	return s;
@@ -22,9 +43,7 @@ function getIssueNoteCommentary(url)
 	var noteIndex = getURLParameter(new String(url), "noteindex");
 
 	var issueIndex = getIssueIndexFromID(issueNoteLinks[noteIndex][0]);
-
-	var s = "<head><link rel=\"stylesheet\" href=\"styles/main.css\" type=\"text/css\"></head>";
-	s = s + "<p><b>" + issues[issueIndex][1] + "</b>";
+	var s = "<p><b>" + issues[issueIndex][1] + "</b>";
 	s = s + "<hr>";
 	s = s +  issueNoteLinks[noteIndex][2] + "</p>";
 	s = s + "<br><a href=javascript:history.back() target=_top>Back</a>";
@@ -64,4 +83,3 @@ function highlightElementsRecurse(n, highlightArray, highlightColor)
 
 	return highlightArray;
 }
-
